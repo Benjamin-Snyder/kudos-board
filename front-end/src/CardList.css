@@ -1,0 +1,9 @@
+.list-of-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left: 60px;
+    padding: 20px;
+
+
+}

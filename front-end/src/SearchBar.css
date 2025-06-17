@@ -1,0 +1,31 @@
+
+
+input{
+    width: 18vw;
+    height: 2vw;
+}
+
+.button-text{
+    height: 100%;
+    width: 5%;
+    margin-left: 10px;
+}
+
+.search-bar .button-text {
+
+    text-align: center;
+    padding: 0px 0px;
+    margin-right: 0px;
+}
+
+.search-bar button{
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    width: 20%;
+}
+
+.search-bar{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+}

@@ -1,0 +1,35 @@
+body, html, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.top-ui{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: bisque;
+}
+
+header{
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: bisque;
+    margin-bottom: 5px;
+}
