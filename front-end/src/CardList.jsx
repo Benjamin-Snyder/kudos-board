@@ -2,15 +2,24 @@ import "./CardList.css"
 import BoardCard from "./BoardCard"
 
 const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
-    const filteredCards = cards.filter(card =>
+    const searchedCards = cards.filter(card =>
         card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const sortedCards = (cards) => {
+    function sortDate(playlist){
+        let sorted = playlist.sort((a,b)=>{
+            if(a.date < b.date) return 1;
+            if(a.date > b.date) return -1;
+            return 0;
+        })
+        return sorted;
+    }
+
+    const filteredCards = (cards) => {
         if (filter === 'All') {
             return cards;
         } else if (filter === 'Recent') {
-            // Implement sorting logic for 'Recent' if needed
+            return sortDate(cards).splice(0,6);
         } else if (filter === 'Celebration') {
             return cards.filter(card => card.type === 'Celebration');
         } else if (filter === 'Thank You') {
@@ -21,7 +30,7 @@ const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
         return [];
     };
 
-    const cardsToDisplay = sortedCards(filteredCards);
+    const cardsToDisplay = filteredCards(searchedCards);
 
     return (
         <div className="list-of-cards">

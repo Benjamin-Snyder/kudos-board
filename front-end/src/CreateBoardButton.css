@@ -1,0 +1,13 @@
+.create-button button{
+    margin-top: 20px;
+    width: 200px;
+    height: 30px;
+    font-size: .9em;
+    flex-grow: 1; /* Allow buttons to grow */
+}
+
+
+.create-button button:hover{
+    transform: scale(1.07);
+    transition: transform 0.3s;
+}

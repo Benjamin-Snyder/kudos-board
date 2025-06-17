@@ -1,5 +1,5 @@
 import "./BoardCard.css"
-import tempImg from "./assets/react.svg"
+
 
 const BoardCard = ({board, onViewClick, onDeleteClick}) => {
     return (
