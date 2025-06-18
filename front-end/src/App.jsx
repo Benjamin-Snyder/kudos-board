@@ -12,10 +12,33 @@ import {fetchAllBoards} from './utils';
 
 function App() {
 
-  const apiBoards = fetchAllBoards();
-
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState(''); // Define searchQuery
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [boards, setBoards] = useState([]);
+
+
+  const loadBoards = async () => {
+    const data = await fetchAllBoards();
+    setBoards(data);
+  };
+
+  useEffect(() => {
+    loadBoards();
+  }, []);
+
+  const apiBoards = fetchAllBoards();
+
+
+
+  const handleCreateBoardClick = () => {
+    setIsModalVisible(true); // Show modal
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false); // Hide modal
+  };
+
 
   const handleViewClick = (board) => {
     console.log('View clicked:', board);
@@ -46,16 +69,20 @@ function App() {
           <FilterButtons setFilter={handleFilterChange} />
         </div>
         <div className="create-board-button">
-          <CreateBoardButton />
+          <CreateBoardButton onClick={handleCreateBoardClick}/>
         </div>
       </div>
 
-
+      <CreateBoardModal
+        isModalVisible={isModalVisible}
+        onClose={handleCloseModal}
+        onBoardCreated={loadBoards}
+      />
 
       <CardList
         filter={filter}
         searchQuery={searchQuery}
-        cards={apiBoards}
+        cards={boards}
         onViewClick={handleViewClick}
         onDeleteClick={handleDeleteClick}
       />

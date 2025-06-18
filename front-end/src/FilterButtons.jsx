@@ -8,7 +8,7 @@ const FilterButtons= ({setFilter}) =>{
     return(
         <div className= "all-buttons">
 
-            <Link to="/"><button id="all-button" onClick={() => setFilter('all')}>All</button></Link>
+            <button id="all-button" onClick={() => setFilter('all')}>All</button>
             <button id="recent-button" onClick={() => setFilter('recent')}>Recent</button>
             <button id = "celebration-button" onClick={() => setFilter('celebration')}>Celebration</button>
             <button id="thankyou-button" onClick={() => setFilter('thank You')}>Thank You</button>

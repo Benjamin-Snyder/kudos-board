@@ -1,14 +1,14 @@
 import { useState, useEffect, use } from 'react';
-import Footer from './Footer';
-import Header from './Header';
-import SearchBar from './SearchBar';
-import FilterButtons from './FilterButtons';
-import CardList from './CardList';
+import Footer from './Footer.jsx';
+import Header from './Header.jsx';
+import SearchBar from './SearchBar.jsx';
+import FilterButtons from './FilterButtons.jsx';
+import CardList from './CardList.jsx';
 import './App.css';
 import CreateBoardButton from './CreateBoardButton.jsx';
 import CreateBoardModal from './CreateBoardModal.jsx';
 
-import {fetchAllBoards} from './utils';
+import {fetchAllBoards} from './utils.js';
 
 function App() {
 
@@ -43,7 +43,7 @@ function App() {
           <SearchBar onSearchChange={handleSearchChange} /> {/* Pass setSearchQuery */}
         </div>
         <div className="filter-buttons">
-          <FilterButtons setFilter={"Recent"} />
+          <FilterButtons setFilter={handleFilterChange} />
         </div>
         <div className="create-board-button">
           <CreateBoardButton />
@@ -53,7 +53,7 @@ function App() {
 
 
       <CardList
-        filter={filter}
+        filter={"recent"}
         searchQuery={searchQuery}
         cards={apiBoards}
         onViewClick={handleViewClick}

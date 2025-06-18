@@ -19,7 +19,13 @@ const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
         if (filter === 'all') {
             return cards;
         } else if (filter === 'recent') {
-            return sortDate(cards).splice(0,6);
+            const sorted = cards.sort((a, b) => {
+                const dateA = new Date(a.updatedAt);
+                const dateB = new Date(b.updatedAt);
+                return dateB - dateA; // Sort in descending order
+            })
+            console.log(sorted)
+            return sorted.splice(0,6);
         } else if (filter === 'celebration') {
             return cards.filter(card => card.type === 'celebration');
         } else if (filter === 'thank You') {

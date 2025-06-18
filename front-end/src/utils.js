@@ -1,29 +1,40 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function fetchAllBoards(){
-    const [boards, setBoards] = useState([]);
-
-    useEffect(() => {
-        fetch(`${BASE_URL}`,{method: 'GET'} )
-        .then(response => {
-            if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Boards:', data);
-            setBoards(data); // Update state with fetched data
-        })
-        .catch(error => {
-            console.error('Error fetching boards:', error);
-        });
-
-    }, []); // Empty dependency array to run only on mount
-
-    return boards;
+// utils.js
+async function fetchAllBoards() {
+    try {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}`);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('Boards:', data);
+    return data;
+    } catch (error) {
+    console.error('Error fetching boards:', error);
+    return [];
+    }
 }
 
-export { fetchAllBoards };
+
+async function createBoard(name, type, author) {
+    try {
+        const response = await axios.post(`${BASE_URL}`, {
+            title: name,
+            type: type,
+            author: author,
+            image: 'https://fastly.picsum.photos/id/211/200/200.jpg?hmac=VJ4wl95YuQJMvM_1O83L3nSfTn20OxaVfWe0wNMZrIc' // Add a default or dynamic image URL
+        });
+
+        console.log('Board created:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating board:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
+
+export { fetchAllBoards, createBoard };
