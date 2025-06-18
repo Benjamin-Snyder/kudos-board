@@ -1,4 +1,5 @@
 import "./BoardCard.css"
+import { Link } from "react-router"
 
 
 const BoardCard = ({board, onViewClick, onDeleteClick}) => {
@@ -8,7 +9,7 @@ const BoardCard = ({board, onViewClick, onDeleteClick}) => {
             <h3>{board.title}</h3>
             <p>{board.type}</p>
             <div className="card-buttons">
-                <button className="view-button" onClick={() => onViewClick(board)}>View Board</button>
+                <Link to={`/boards/${board.id}/cards`} ><button className="view-button" onClick={() => onViewClick(board)}>View Board</button></Link>
                 <button className="delete-button" onClick={ ()=> onDeleteClick(board.id)}>Delete Board</button>
             </div>
         </div>

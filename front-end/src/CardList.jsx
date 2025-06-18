@@ -6,14 +6,6 @@ const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
         card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    function sortDate(playlist){
-        let sorted = playlist.sort((a,b)=>{
-            if(a.date < b.date) return 1;
-            if(a.date > b.date) return -1;
-            return 0;
-        })
-        return sorted;
-    }
 
     const filteredCards = (cards) => {
         if (filter === 'all') {

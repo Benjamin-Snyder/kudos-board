@@ -45,7 +45,6 @@ function App() {
   };
 
   const handleDeleteClick = async (boardId) => {
-    console.log('Delete clicked:', boardId);
     try {
       await deleteBoard(boardId);
       loadBoards(); // Refresh the list of boards after deletion
