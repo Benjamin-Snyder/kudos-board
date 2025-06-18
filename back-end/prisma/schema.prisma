@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -21,7 +20,7 @@ model Board {
   author      String?
   type        String
   image       String
-  cards       Card[]?
+  cards       Card[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
 
@@ -30,6 +29,7 @@ model Board {
 model Card {
   id          Int   @id @default(autoincrement())
   boardId     Int
+  board       Board @relation(fields: [boardId], references: [id])
   title       String
   description String
   gif         String
