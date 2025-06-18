@@ -4,7 +4,7 @@ import "./BoardCard.css"
 const BoardCard = ({board, onViewClick, onDeleteClick}) => {
     return (
         <div className="board-card" >
-            <img src={board.img} alt="Board Card" width="200px"/>
+            <img src={board.image} alt="Board Card" width="200px"/>
             <h3>{board.title}</h3>
             <p>{board.type}</p>
             <div className="card-buttons">

@@ -16,16 +16,16 @@ const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
     }
 
     const filteredCards = (cards) => {
-        if (filter === 'All') {
+        if (filter === 'all') {
             return cards;
-        } else if (filter === 'Recent') {
+        } else if (filter === 'recent') {
             return sortDate(cards).splice(0,6);
-        } else if (filter === 'Celebration') {
-            return cards.filter(card => card.type === 'Celebration');
-        } else if (filter === 'Thank You') {
-            return cards.filter(card => card.type === 'Thank You');
-        } else if (filter === 'Inspiration') {
-            return cards.filter(card => card.type === 'Inspiration');
+        } else if (filter === 'celebration') {
+            return cards.filter(card => card.type === 'celebration');
+        } else if (filter === 'thank You') {
+            return cards.filter(card => card.type === 'thank you');
+        } else if (filter === 'inspiration') {
+            return cards.filter(card => card.type === 'inspiration');
         }
         return [];
     };

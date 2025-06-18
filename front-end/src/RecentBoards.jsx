@@ -43,7 +43,7 @@ function App() {
           <SearchBar onSearchChange={handleSearchChange} /> {/* Pass setSearchQuery */}
         </div>
         <div className="filter-buttons">
-          <FilterButtons setFilter={handleFilterChange} />
+          <FilterButtons setFilter={"Recent"} />
         </div>
         <div className="create-board-button">
           <CreateBoardButton />
