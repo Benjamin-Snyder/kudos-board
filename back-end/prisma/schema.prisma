@@ -33,5 +33,6 @@ model Card {
   title       String
   description String
   gif         String
+  upvotes     Int @default(0)
   owner       String?
 }
