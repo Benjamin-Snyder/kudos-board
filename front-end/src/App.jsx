@@ -8,7 +8,7 @@ import './App.css';
 import CreateBoardButton from './CreateBoardButton.jsx';
 import CreateBoardModal from './CreateBoardModal.jsx';
 
-import {fetchAllBoards} from './utils';
+import {fetchAllBoards, deleteBoard} from './utils';
 
 function App() {
 
@@ -44,9 +44,16 @@ function App() {
     console.log('View clicked:', board);
   };
 
-  const handleDeleteClick = (board) => {
-    console.log('Delete clicked:', board);
+  const handleDeleteClick = async (boardId) => {
+    console.log('Delete clicked:', boardId);
+    try {
+      await deleteBoard(boardId);
+      loadBoards(); // Refresh the list of boards after deletion
+    } catch (error) {
+      console.error('Failed to delete board:', error);
+    }
   };
+
 
   const handleFilterChange = (newFilter) =>{
     setFilter(newFilter);

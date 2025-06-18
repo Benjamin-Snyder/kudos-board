@@ -9,7 +9,7 @@ const BoardCard = ({board, onViewClick, onDeleteClick}) => {
             <p>{board.type}</p>
             <div className="card-buttons">
                 <button className="view-button" onClick={() => onViewClick(board)}>View Board</button>
-                <button className="delete-button" onClick={() => onDeleteClick(board)}>Delete Board</button>
+                <button className="delete-button" onClick={ ()=> onDeleteClick(board.id)}>Delete Board</button>
             </div>
         </div>
     );

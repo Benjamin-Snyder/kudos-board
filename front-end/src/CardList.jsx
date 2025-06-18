@@ -24,7 +24,6 @@ const CardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
                 const dateB = new Date(b.updatedAt);
                 return dateB - dateA; // Sort in descending order
             })
-            console.log(sorted)
             return sorted.splice(0,6);
         } else if (filter === 'celebration') {
             return cards.filter(card => card.type === 'celebration');

@@ -3,19 +3,19 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-// utils.js
+
 async function fetchAllBoards() {
     try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}`);
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log('Boards:', data);
-    return data;
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        return data;
     } catch (error) {
-    console.error('Error fetching boards:', error);
-    return [];
+        console.error('Error fetching boards:', error);
+        return [];
     }
 }
 
@@ -29,7 +29,7 @@ async function createBoard(name, type, author) {
             image: 'https://fastly.picsum.photos/id/211/200/200.jpg?hmac=VJ4wl95YuQJMvM_1O83L3nSfTn20OxaVfWe0wNMZrIc' // Add a default or dynamic image URL
         });
 
-        console.log('Board created:', response.data);
+
         return response.data;
     } catch (error) {
         console.error('Error creating board:', error.response ? error.response.data : error.message);
@@ -37,4 +37,14 @@ async function createBoard(name, type, author) {
     }
 }
 
-export { fetchAllBoards, createBoard };
+async function deleteBoard(boardId) {
+    try {
+        const response = await axios.delete(`${BASE_URL}/${boardId}`);
+        return response.data;
+    }catch(err){
+        console.error('Error deleting board:', err);
+        throw err;
+    }
+}
+
+export { fetchAllBoards, createBoard, deleteBoard };

@@ -37,12 +37,35 @@ async updateBoard (id, changes) {
 
 },
 
+/*
 async deleteBoard(id) {
     // DELETE http://localhost:5432/api/boards/1
     // DELETE FROM "Board" WHERE id = 1;
     const deleted = await prisma.board.delete({ where: { id } });
     return deleted;
 
+},
+*/
+
+async deleteBoard(id) {
+    try {
+        // delete all cards associated with the board first
+        await prisma.card.deleteMany({
+            where: {
+                boardId: id
+            }
+        });
+
+        // delete the board
+        const deletedBoard = await prisma.board.delete({
+            where: { id }
+        });
+
+        return deletedBoard;
+    } catch (err) {
+        console.error('Error deleting board:', err);
+        throw err;
+    }
 },
 
 async createCard(boardID,newCard){
