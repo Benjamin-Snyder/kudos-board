@@ -33,26 +33,26 @@ const handleCreateBoard = async () => {
 
 return (
     <div className="opaque-background" onClick={onClose}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>
-        &times;
-        </button>
-        <h2>Create a New Board</h2>
-        <div className="inputs">
-        <label htmlFor="board-title">Title:</label>
-        <input type="text" id="board-title" placeholder={titleText}/>
-        <label htmlFor="types">Category:</label>
-        <select name="types" id="types">
-            <option value>{categoryText}</option>
-            <option value="celebration">Celebration</option>
-            <option value="thank you">Thank You</option>
-            <option value="inspiration">Inspiration</option>
-        </select>
-        <label htmlFor="board-author">Author:</label>
-        <input type="text" id="board-author" />
-        <button onClick={handleCreateBoard}>Create Board</button>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={onClose}>
+            &times;
+            </button>
+            <h2>Create a New Board</h2>
+            <div className="inputs">
+                <label htmlFor="board-title">Title:</label>
+                <input type="text" id="board-title" placeholder={titleText}/>
+                <label htmlFor="types">Category:</label>
+                <select name="types" id="types">
+                    <option value>{categoryText}</option>
+                    <option value="celebration">Celebration</option>
+                    <option value="thank you">Thank You</option>
+                    <option value="inspiration">Inspiration</option>
+                </select>
+                <label htmlFor="board-author">Author:</label>
+                <input type="text" id="board-author" />
+                <button onClick={handleCreateBoard}>Create Board</button>
+            </div>
         </div>
-    </div>
     </div>
 );
 };

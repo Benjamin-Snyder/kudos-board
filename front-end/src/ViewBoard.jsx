@@ -1,4 +1,3 @@
-
 import "./ViewBoard.css";
 import { Link } from "react-router"; // Corrected import
 import { useParams } from "react-router"; // Corrected import
@@ -8,6 +7,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import CardList from "./CardList.jsx";
 import { upvoteCard, deleteCard } from "./utils.js";
+import CreateCardModal from "./CreateCardModal.jsx";
 
 const ViewBoard = () => {
     const { id } = useParams();
@@ -15,7 +15,7 @@ const ViewBoard = () => {
     const [cards, setCards] = useState([]); // State for cards
     const [loading, setLoading] = useState(true); // Add loading state
     const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+    const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
 
     const fetchBoard = async () => {
         try {
@@ -42,28 +42,33 @@ const ViewBoard = () => {
         loadCards();
     }, [id]);
 
-
     const handleUpvoteClick = async (card) => {
         try {
             const updatedCard = await upvoteCard(card);
-            setCards((prevCards) => // ensure the order of card stays the same
+            setCards((prevCards) =>
                 prevCards.map((c) => (c.id === updatedCard.id ? updatedCard : c))
             );
-        }catch (error) {
+        } catch (error) {
             console.error("Error upvoting card:", error);
         }
-    }
+    };
 
     const handleDeleteClick = async (card) => {
-
-        try{
+        try {
             await deleteCard(card);
             loadCards();
-        }catch(error){
+        } catch (error) {
             console.error("Error deleting card:", error);
         }
-    }
+    };
 
+    const handleCloseModal = () => {
+        setIsModalVisible(false); // Set modal visibility to false
+    };
+
+    const handleOpenModal = () => {
+        setIsModalVisible(true); // Set modal visibility to true
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -73,21 +78,27 @@ const ViewBoard = () => {
         return <div>No board found</div>;
     }
 
-
     return (
         <div className="view-board">
             <Link to="/"><button id="home-button">Home</button></Link>
             <div className="top-portion">
-                <Header/>
+                <Header />
                 <h1>{board.title}</h1>
-                <button>Create a Card</button>
+                <button onClick={handleOpenModal}>Create a Card</button>
                 {cards.length === 0 ? <h2 className="no-cards">No cards found</h2> : null}
             </div>
 
+            <CreateCardModal
+                boardId={id} // Pass boardId here
+                isModalVisible={isModalVisible}
+                onClose={handleCloseModal}
+                onCreateCard={loadCards}
+            />
 
-            <CardList cards={cards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick}/>
 
-            <Footer/>
+            <CardList cards={cards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick} />
+
+            <Footer />
         </div>
     );
 };

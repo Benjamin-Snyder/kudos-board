@@ -47,6 +47,21 @@ async function deleteBoard(boardId) {
     }
 }
 
+async function createCard(boardId, title, description, gif, owner) {
+    try{
+        const response = await axios.post(`${BASE_URL}/${boardId}/cards`, {
+            boardId: boardId,
+            title: title,
+            description: description,
+            gif: gif,
+            owner: owner,
+        })
+        return response.data;
+    }catch(err){
+        console.error('Error creating card:', err);
+        throw err;
+    }
+}
 
 async function deleteCard(card) {
     try {
@@ -88,4 +103,4 @@ async function upvoteCard(card) {
 
 
 
-export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard, deleteCard };
+export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard, deleteCard, createCard };
