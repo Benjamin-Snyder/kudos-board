@@ -7,7 +7,7 @@ import axios from "axios";
 import Footer from "./Footer";
 import Header from "./Header";
 import CardList from "./CardList.jsx";
-import { fetchCards } from "./utils.js";
+import { upvoteCard } from "./utils.js";
 
 const ViewBoard = () => {
     const { id } = useParams();
@@ -21,7 +21,6 @@ const ViewBoard = () => {
         try {
             const response = await axios.get(`${BASE_URL}/${id}`);
             setBoard(response.data);
-            console.log(`data: ${response.data}`);
         } catch (error) {
             console.error("Error fetching board:", error);
         }
@@ -31,7 +30,6 @@ const ViewBoard = () => {
         try {
             const cardsData = await axios.get(`${BASE_URL}/${id}/cards`);
             setCards(cardsData.data);
-            console.log(`Carddata: ${cardsData.data}`);
         } catch (error) {
             console.error("Error fetching cards:", error);
         } finally {
@@ -45,7 +43,17 @@ const ViewBoard = () => {
     }, [id]);
 
 
+    const handleUpvoteClick = async (card) => {
 
+        try {
+            const updatedCard = await upvoteCard(card);
+            setCards((prevCards) => // ensure the order of card stays the same
+                prevCards.map((c) => (c.id === updatedCard.id ? updatedCard : c))
+            );
+        }catch (error) {
+            console.error("Error upvoting card:", error);
+        }
+    }
 
 
     if (loading) {
@@ -56,7 +64,7 @@ const ViewBoard = () => {
         return <div>No board found</div>;
     }
 
-    console.log(`cards: ${cards}`)
+
     return (
         <div className="view-board">
             <Link to="/"><button id="home-button">Home</button></Link>
@@ -64,9 +72,11 @@ const ViewBoard = () => {
                 <Header/>
                 <h1>{board.title}</h1>
                 <button>Create a Card</button>
+                {cards.length === 0 ? <h2 className="no-cards">No cards found</h2> : null}
             </div>
 
-            <CardList cards={cards} />
+
+            <CardList cards={cards} onUpvoteClick={handleUpvoteClick}/>
 
             <Footer/>
         </div>

@@ -63,6 +63,19 @@ async function fetchCards(boardId) {
     }
 }
 
+async function upvoteCard(card) {
+
+    try {
+        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/${card.boardId}/cards/${card.id}`,{
+            upvotes: card.upvotes + 1
+        });
+        return response.data;
+    }catch(err){
+        console.error('Error upvoting card:', err);
+        throw err;
+    }
+}
 
 
-export { fetchAllBoards, createBoard, deleteBoard, fetchCards };
+
+export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard };
