@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import FilterButtons from './FilterButtons';
-import CardList from './CardList';
+import BoardList from './BoardList.jsx';
 import './App.css';
 import CreateBoardButton from './CreateBoardButton.jsx';
 import CreateBoardModal from './CreateBoardModal.jsx';
@@ -85,7 +85,7 @@ function App() {
         onBoardCreated={loadBoards}
       />
 
-      <CardList
+      <BoardList
         filter={filter}
         searchQuery={searchQuery}
         cards={boards}

@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 async function fetchAllBoards() {
     try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}`);
+        const response = await fetch(`${BASE_URL}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -47,4 +47,22 @@ async function deleteBoard(boardId) {
     }
 }
 
-export { fetchAllBoards, createBoard, deleteBoard };
+
+async function fetchCards(boardId) {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/${boardId}/cards`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching boards:', error);
+        return [];
+    }
+}
+
+
+
+export { fetchAllBoards, createBoard, deleteBoard, fetchCards };

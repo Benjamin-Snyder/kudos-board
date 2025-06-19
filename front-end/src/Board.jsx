@@ -1,8 +1,8 @@
-import "./BoardCard.css"
+import "./Board.css"
 import { Link } from "react-router"
 
 
-const BoardCard = ({board, onViewClick, onDeleteClick}) => {
+const Board = ({board, onViewClick, onDeleteClick}) => {
     return (
         <div className="board-card" >
             <img src={board.image} alt="Board Card" width="200px"/>
@@ -18,4 +18,4 @@ const BoardCard = ({board, onViewClick, onDeleteClick}) => {
 
 
 
-export default BoardCard
+export default Board
