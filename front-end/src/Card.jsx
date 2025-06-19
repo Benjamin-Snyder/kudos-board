@@ -9,7 +9,7 @@ const Card = ({card, onUpvoteClick, onDeleteClick}) => {
             <p>{card.description}</p>
             <div className="card-buttons">
                 <button className="upvote-button" onClick={()=>onUpvoteClick(card)}>{`Upvote: ${card.upvotes}`}</button>
-                <button className="delete-button" >Delete Board</button>
+                <button className="delete-button" onClick={()=>onDeleteClick(card)}>Delete Board</button>
             </div>
         </div>
     );

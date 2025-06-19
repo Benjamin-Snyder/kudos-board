@@ -48,6 +48,15 @@ async function deleteBoard(boardId) {
 }
 
 
+async function deleteCard(card) {
+    try {
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/${card.boardId}/cards/${card.id}`);
+        return response.data;
+    }catch(err){
+        console.error('Error deleting card:', err);
+    }
+}
+
 async function fetchCards(boardId) {
     try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/${boardId}/cards`);
@@ -64,7 +73,6 @@ async function fetchCards(boardId) {
 }
 
 async function upvoteCard(card) {
-
     try {
         const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/${card.boardId}/cards/${card.id}`,{
             upvotes: card.upvotes + 1
@@ -78,4 +86,6 @@ async function upvoteCard(card) {
 
 
 
-export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard };
+
+
+export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard, deleteCard };

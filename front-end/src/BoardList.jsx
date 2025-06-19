@@ -1,7 +1,7 @@
 import "./BoardList.css"
 import Board from "./Board"
 
-const BoardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => {
+const BoardList = ({filter, searchQuery, cards, onDeleteClick}) => {
     const searchedCards = cards.filter(card =>
         card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -35,7 +35,6 @@ const BoardList = ({filter, searchQuery, cards, onViewClick, onDeleteClick}) => 
                 <Board
                     key={card.id}
                     board={card}
-                    onViewClick={onViewClick}
                     onDeleteClick={onDeleteClick}
                 />
             ))}

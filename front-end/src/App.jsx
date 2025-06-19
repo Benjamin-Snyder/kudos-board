@@ -40,9 +40,7 @@ function App() {
   };
 
 
-  const handleViewClick = (board) => {
-    console.log('View clicked:', board);
-  };
+
 
   const handleDeleteClick = async (boardId) => {
     try {
@@ -89,7 +87,6 @@ function App() {
         filter={filter}
         searchQuery={searchQuery}
         cards={boards}
-        onViewClick={handleViewClick}
         onDeleteClick={handleDeleteClick}
       />
 

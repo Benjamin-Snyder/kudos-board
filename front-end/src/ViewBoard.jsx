@@ -7,7 +7,7 @@ import axios from "axios";
 import Footer from "./Footer";
 import Header from "./Header";
 import CardList from "./CardList.jsx";
-import { upvoteCard } from "./utils.js";
+import { upvoteCard, deleteCard } from "./utils.js";
 
 const ViewBoard = () => {
     const { id } = useParams();
@@ -44,7 +44,6 @@ const ViewBoard = () => {
 
 
     const handleUpvoteClick = async (card) => {
-
         try {
             const updatedCard = await upvoteCard(card);
             setCards((prevCards) => // ensure the order of card stays the same
@@ -52,6 +51,16 @@ const ViewBoard = () => {
             );
         }catch (error) {
             console.error("Error upvoting card:", error);
+        }
+    }
+
+    const handleDeleteClick = async (card) => {
+
+        try{
+            await deleteCard(card);
+            loadCards();
+        }catch(error){
+            console.error("Error deleting card:", error);
         }
     }
 
@@ -76,7 +85,7 @@ const ViewBoard = () => {
             </div>
 
 
-            <CardList cards={cards} onUpvoteClick={handleUpvoteClick}/>
+            <CardList cards={cards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick}/>
 
             <Footer/>
         </div>
