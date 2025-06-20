@@ -2,7 +2,6 @@ import "./CreateCardModal.css"
 import { useEffect, useState } from "react"
 import { createCard } from "./utils.js"
 import axios from "axios";
-import { set } from "../../back-end/api/server.js";
 const GIPHY_API_KEY = import.meta.env.VITE_API_KEY;
 
 const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => {
@@ -13,12 +12,6 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
     const [descriptionError, setDescriptionError] = useState(false);
     const [gifUrlError, setGifUrlError] = useState(false);
 
-
-    useEffect(() => {
-        if(isModalVisible){
-            setSearchQuery(""); // Clear search query when modal is opened
-        }
-    }),[isModalVisible];
 
     if (!isModalVisible) return null;
 
@@ -145,7 +138,7 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
 
                     <button className="copy-button">Copy GIF URL</button>
                     <input type="text" id="owner" placeholder="Enter owner (optional)" />
-                    <button className="submit" onClick={handleCreateCard} >Create Card</button>
+                    <button className="submit" onClick={ () => {handleCreateCard(), setSearchQuery("")}} >Create Card</button>
                 </div>
 
             </div>

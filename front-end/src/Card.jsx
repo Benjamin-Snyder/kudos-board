@@ -1,10 +1,26 @@
 import "./Card.css"
+import filledPin from "./assets/filled-pin.png"
+import emptyPin from "./assets/empty-pin.png"
+import {useState} from "react"
+
 
 const Card = ({card, onUpvoteClick, onDeleteClick}) => {
+    const [pinSrc, setPinSrc] = useState(emptyPin)
+
+    const handlePinClick = () => {
+        if (pinSrc === emptyPin) {
+            setPinSrc(filledPin);
+        }
+        else{
+            setPinSrc(emptyPin);
+        }
+    }
+
 
     return (
         <div className="card" >
-            <img src={card.gif} alt="Card Gif" width="200px"/>
+            <img className="pin-button" src={pinSrc} onClick={handlePinClick} alt="Pin Button" width="30px"/>
+            <img className="card-gif"src={card.gif} alt="Card Gif" width="200px"/>
             <h3>{card.title}</h3>
             <p>{card.description}</p>
             <div className="card-buttons">

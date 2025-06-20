@@ -1,15 +1,16 @@
 .card {
+    position: relative; /* Ensure the card is a positioned element */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Center items horizontally */
-    width: 100%; /* Use full width for responsiveness */
-    max-width: 300px; /* Set a max width for larger screens */
-    height: auto; /* Allow height to adjust based on content */
-    padding: 16px; /* Add some padding for spacing */
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 16px;
     border: 1px solid #000000;
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-    margin: 10px; /* Add margin for spacing between cards */
+    box-sizing: border-box;
+    margin: 10px;
 }
 
 .card-buttons{
@@ -19,7 +20,18 @@
 
 }
 
+.pin-button {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    width: 30px; /* Ensure the size is consistent */
+    cursor: pointer; /* Optional: change cursor to pointer */
+    margin-bottom: 0px;
+}
 
+.card-gif{
+    margin-top: 10px;
+}
 
 .card-buttons button:hover{
     transform: scale(1.07);

@@ -35,4 +35,5 @@ model Card {
   gif         String
   upvotes     Int @default(0)
   owner       String?
+  isPinned    Boolean @default(false)
 }

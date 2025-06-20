@@ -17,6 +17,7 @@ const ViewBoard = () => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
 
+
     const fetchBoard = async () => {
         try {
             const response = await axios.get(`${BASE_URL}/${id}`);
@@ -25,6 +26,7 @@ const ViewBoard = () => {
             console.error("Error fetching board:", error);
         }
     };
+
 
     const loadCards = async () => {
         try {
@@ -41,6 +43,17 @@ const ViewBoard = () => {
         fetchBoard();
         loadCards();
     }, [id]);
+
+    const sortbyUpvotes = (cards) => {
+        let sorted =  [...cards].sort((a,b) => {
+            if(a.upvotes < b.upvotes) return 1;
+            if(a.upvotes > b.upvotes) return -1;
+            return 0;
+        })
+        return sorted;
+    }
+
+    let sortedCards = sortbyUpvotes(cards); // display ordered by upvotes
 
     const handleUpvoteClick = async (card) => {
         try {
@@ -96,7 +109,7 @@ const ViewBoard = () => {
             />
 
 
-            <CardList cards={cards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick} />
+            <CardList cards={sortedCards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick} />
 
             <Footer />
         </div>

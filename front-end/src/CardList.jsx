@@ -3,6 +3,7 @@ import Card from "./Card"
 
 const CardList = ({cards, onUpvoteClick, onDeleteClick}) => {
 
+
     return (
         <div className="list-of-cards">
             {cards.map((card) => (
