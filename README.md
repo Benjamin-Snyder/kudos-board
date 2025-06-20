@@ -149,7 +149,7 @@ I am very happy with how it came out, additional features could have been cool. 
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+Video turned out good. I believe I went over all the features and if I didnt, they are all there and working.
 
 ### Open-source libraries used
 
