@@ -36,4 +36,5 @@ model Card {
   upvotes     Int @default(0)
   owner       String?
   isPinned    Boolean @default(false)
+  pinnedAt    DateTime?
 }

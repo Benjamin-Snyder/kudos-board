@@ -46,8 +46,11 @@ const ViewBoard = () => {
 
     const handlePinClick = async (card, isPinned) => {
         try {
-            // Update the card's pinned state in the backend
-            const updatedCard = { ...card, isPinned: isPinned };
+            const updatedCard = {
+                ...card,
+                isPinned: isPinned,
+                pinnedAt: isPinned ? new Date().toISOString() : null // Set timestamp or null
+            };
             await axios.put(`${BASE_URL}/${id}/cards/${card.id}`, updatedCard);
 
             setCards((prevCards) =>
@@ -62,6 +65,10 @@ const ViewBoard = () => {
         let sorted = [...cards].sort((a, b) => {
             if (a.isPinned && !b.isPinned) return -1;
             if (!a.isPinned && b.isPinned) return 1;
+            if (a.isPinned && b.isPinned) {
+                // Sort pinned cards by pinnedAt timestamp
+                return new Date(b.pinnedAt) - new Date(a.pinnedAt);
+            }
             if (a.upvotes < b.upvotes) return 1;
             if (a.upvotes > b.upvotes) return -1;
             return 0;
