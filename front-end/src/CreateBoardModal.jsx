@@ -1,60 +1,86 @@
+
 import "./CreateBoardModal.css";
 import { createBoard } from './utils.js';
-import {useState} from 'react';
+import { useState } from 'react';
 
 const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
-
     const [titleText, setTitleText] = useState('');
     const [categoryText, setCategoryText] = useState('Select a category');
+    const [titleError, setTitleError] = useState(false);
+    const [categoryError, setCategoryError] = useState(false);
 
     if (!isModalVisible) {
-    return null;
-}
-
-const handleCreateBoard = async () => {
-    const title = document.getElementById('board-title').value;
-    const type = document.getElementById('types').value;
-    const author = document.getElementById('board-author').value;
-
-    if(!title || !type) {
-        setTitleText('Title is required');
-        setCategoryText('Category is required');
-        return;
+        return null;
     }
 
-    try {
-    await createBoard(title, type, author);
-    onBoardCreated(); // Notify the parent component that a new board was created
-    onClose(); // Close the modal after creating the board
-    } catch (error) {
-    console.error('Failed to create board:', error);
-    }
-};
+    const handleCreateBoard = async () => {
+        const title = document.getElementById('board-title').value;
+        const type = document.getElementById('types').value;
+        const author = document.getElementById('board-author').value;
 
-return (
-    <div className="opaque-background" onClick={onClose}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={onClose}>
-            &times;
-            </button>
-            <h2>Create a New Board</h2>
-            <div className="inputs">
-                <label htmlFor="board-title">Title:</label>
-                <input type="text" id="board-title" placeholder={titleText}/>
-                <label htmlFor="types">Category:</label>
-                <select name="types" id="types">
-                    <option value>{categoryText}</option>
-                    <option value="celebration">Celebration</option>
-                    <option value="thank you">Thank You</option>
-                    <option value="inspiration">Inspiration</option>
-                </select>
-                <label htmlFor="board-author">Author:</label>
-                <input type="text" id="board-author" />
-                <button onClick={handleCreateBoard}>Create Board</button>
+        let hasError = false;
+        if (!title) {
+            setTitleError(true);
+            hasError = true;
+        } else {
+            setTitleError(false);
+        }
+
+        if (!type || type === 'Select a category') {
+            setCategoryError(true);
+            hasError = true;
+        } else {
+            setCategoryError(false);
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        try {
+            await createBoard(title, type, author);
+            onBoardCreated();
+            onClose();
+        } catch (error) {
+            console.error('Failed to create board:', error);
+        }
+    };
+
+    return (
+        <div className="opaque-background" onClick={onClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <button className="close-button" onClick={onClose}>
+                    &times;
+                </button>
+                <h2>Create a New Board</h2>
+                <div className="inputs">
+                    {titleError && <span style={{ color: 'red' }}>Title is required</span>}
+                    <label htmlFor="board-title">Title:</label>
+                    <input
+                        type="text"
+                        id="board-title"
+                        placeholder=""
+                        style={{ borderColor: titleError ? 'red' : 'initial' }}
+                    />
+                    {categoryError && <span style={{ color: 'red' }}>Category is required</span>}
+                    <label htmlFor="types">Category:</label>
+                    <select
+                        name="types"
+                        id="types"
+                        style={{ borderColor: categoryError ? 'red' : 'initial' }}
+                    >
+                        <option value="Select a category">{categoryText}</option>
+                        <option value="celebration">Celebration</option>
+                        <option value="thank you">Thank You</option>
+                        <option value="inspiration">Inspiration</option>
+                    </select>
+                    <label htmlFor="board-author">Author:</label>
+                    <input type="text" id="board-author" />
+                    <button onClick={handleCreateBoard}>Create Board</button>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default CreateBoardModal;
