@@ -70,8 +70,8 @@ const ViewBoard = () => {
                 // Sort pinned cards by pinnedAt timestamp
                 return new Date(b.pinnedAt) - new Date(a.pinnedAt);
             }
-            if (a.upvotes < b.upvotes) return 1;
-            if (a.upvotes > b.upvotes) return -1;
+            if (a.createdAt < b.createdAt) return 1;
+            if (a.createdAt > b.createdAt) return -1;
             return 0;
         });
         return sorted;

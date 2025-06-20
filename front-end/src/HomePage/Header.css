@@ -22,6 +22,10 @@
     filter: invert(1);
 }
 
+.header.dark-mode .mode-label {
+    color: white;
+}
+
 .toggle-switch {
     position: relative;
     display: inline-block;

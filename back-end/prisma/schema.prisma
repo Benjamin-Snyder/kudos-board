@@ -38,5 +38,5 @@ model Card {
   isPinned    Boolean @default(false)
   pinnedAt    DateTime?
   comments    String[]
-
+  createdAt   DateTime @default(now())
 }

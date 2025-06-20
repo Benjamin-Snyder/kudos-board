@@ -10,7 +10,7 @@ const Header = () => {
         toggleDarkMode();
     }
     return(
-        <div className="header">
+        <div className={`header ${darkMode ? 'dark-mode' : ''}`}>
             <img src= {medalSrc} alt="Main Logo" />
             <h1>KudoBoard</h1>
             <label className="toggle-switch">
