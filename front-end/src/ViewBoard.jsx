@@ -44,16 +44,32 @@ const ViewBoard = () => {
         loadCards();
     }, [id]);
 
-    const sortbyUpvotes = (cards) => {
-        let sorted =  [...cards].sort((a,b) => {
-            if(a.upvotes < b.upvotes) return 1;
-            if(a.upvotes > b.upvotes) return -1;
-            return 0;
-        })
-        return sorted;
-    }
+    const handlePinClick = async (card, isPinned) => {
+        try {
+            // Update the card's pinned state in the backend
+            const updatedCard = { ...card, isPinned: isPinned };
+            await axios.put(`${BASE_URL}/${id}/cards/${card.id}`, updatedCard);
 
-    let sortedCards = sortbyUpvotes(cards); // display ordered by upvotes
+            setCards((prevCards) =>
+                prevCards.map((c) => (c.id === card.id ? updatedCard : c))
+            );
+        } catch (error) {
+            console.error("Error updating pin state:", error);
+        }
+    };
+
+    const sortbyUpvotesAndPins = (cards) => {
+        let sorted = [...cards].sort((a, b) => {
+            if (a.isPinned && !b.isPinned) return -1;
+            if (!a.isPinned && b.isPinned) return 1;
+            if (a.upvotes < b.upvotes) return 1;
+            if (a.upvotes > b.upvotes) return -1;
+            return 0;
+        });
+        return sorted;
+    };
+
+    let sortedCards = sortbyUpvotesAndPins(cards);
 
     const handleUpvoteClick = async (card) => {
         try {
@@ -74,6 +90,9 @@ const ViewBoard = () => {
             console.error("Error deleting card:", error);
         }
     };
+
+
+
 
     const handleCloseModal = () => {
         setIsModalVisible(false); // Set modal visibility to false
@@ -109,7 +128,12 @@ const ViewBoard = () => {
             />
 
 
-            <CardList cards={sortedCards} onUpvoteClick={handleUpvoteClick} onDeleteClick={handleDeleteClick} />
+            <CardList
+                cards={sortedCards}
+                onUpvoteClick={handleUpvoteClick}
+                onDeleteClick={handleDeleteClick}
+                onPinClick={handlePinClick}
+            />
 
             <Footer />
         </div>
