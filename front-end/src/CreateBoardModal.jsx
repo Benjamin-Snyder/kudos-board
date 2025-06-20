@@ -4,8 +4,6 @@ import { createBoard } from './utils.js';
 import { useState } from 'react';
 
 const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
-    const [titleText, setTitleText] = useState('');
-    const [categoryText, setCategoryText] = useState('Select a category');
     const [titleError, setTitleError] = useState(false);
     const [categoryError, setCategoryError] = useState(false);
 
@@ -47,9 +45,9 @@ const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
     };
 
     return (
-        <div className="opaque-background" onClick={onClose}>
+        <div className="opaque-background" onClick={() => {onClose(), setCategoryError(false), setTitleError(false)}}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="close-button" onClick={onClose}>
+                <button className="close-button" onClick={() => {onClose(), setCategoryError(false), setTitleError(false)}}>
                     &times;
                 </button>
                 <h2>Create a New Board</h2>
@@ -69,7 +67,7 @@ const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
                         id="types"
                         style={{ borderColor: categoryError ? 'red' : 'initial' }}
                     >
-                        <option value="Select a category">{categoryText}</option>
+                        <option value="Select a category">Select a category</option>
                         <option value="celebration">Celebration</option>
                         <option value="thank you">Thank You</option>
                         <option value="inspiration">Inspiration</option>
