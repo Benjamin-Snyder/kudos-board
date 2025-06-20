@@ -138,6 +138,29 @@ server.get('/api/boards/:boardId/cards', async (req, res, next) => { //get all c
     }
 })
 
+// [Get] /api/board/:boardId/cards/:cardId
+server.get('/api/boards/:boardId/cards/:cardId', async (req, res, next) => { //get card by ID
+    const boardId = Number(req.params.boardId);
+    const cardId = Number(req.params.cardId);
+
+    try {
+        const card = await prisma.card.findUnique({
+            where: {
+                id: cardId,
+                boardId: boardId
+            }
+        });
+
+        if (card) { // error handling
+            res.json(card);
+        } else {
+            next({ status: 404, message: `Card not found with ID ${cardId} on board ${boardId}` });
+        }
+    } catch (err) {
+        next(err);
+    }
+});
+
 // [Post] /api/board/:boardId/cards
 server.post('/api/boards/:boardId/cards', async (req, res, next) => { //create card in board
     const boardId = Number(req.params.boardId);
@@ -164,35 +187,33 @@ server.post('/api/boards/:boardId/cards', async (req, res, next) => { //create c
 
 
 //[Put] /api/board/:boardId/cards/:cardId
-server.put('/api/boards/:boardId/cards/:cardId', async (req, res, next) => { // update vote count
+server.put('/api/boards/:boardId/cards/:cardId', async (req, res, next) => {
     const boardId = Number(req.params.boardId);
     const cardId = Number(req.params.cardId);
     const changes = req.body;
 
-    try{
+    try {
         const board = await findBoardById(boardId);
         const card = await findCardById(cardId);
 
-        if(board){
-            const changedValid = (changes.upvotes !== undefined)
+        if (board) {
+            const changedValid = (changes.upvotes !== undefined || changes.comments !== undefined);
 
-            if(card && changedValid){ //error handling
+            if (card && changedValid) { // error handling
                 const updated = await updateCard(cardId, changes);
                 res.json(updated);
-            }
-            else{
+            } else {
                 next({ status: 422, message: "Invalid ID or changes" });
             }
-        }
-        else{
+        } else {
             next({ status: 404, message: "Board not found" });
         }
 
-    }catch(err){
+    } catch (err) {
         next(err);
     }
+});
 
-})
 
 
 

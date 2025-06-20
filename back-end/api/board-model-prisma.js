@@ -37,15 +37,6 @@ async updateBoard (id, changes) {
 
 },
 
-/*
-async deleteBoard(id) {
-    // DELETE http://localhost:5432/api/boards/1
-    // DELETE FROM "Board" WHERE id = 1;
-    const deleted = await prisma.board.delete({ where: { id } });
-    return deleted;
-
-},
-*/
 
 async deleteBoard(id) {
     try {

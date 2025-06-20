@@ -99,8 +99,28 @@ async function upvoteCard(card) {
     }
 }
 
+async function addComment(card, newComment) {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/${card.boardId}/cards/${card.id}`);
+        const currentComments = response.data.comments || [];
+
+        const updatedComments = [...currentComments, newComment];
+
+        const updateResponse = await axios.put(`${import.meta.env.VITE_BASE_URL}/${card.boardId}/cards/${card.id}`, {
+            comments: updatedComments
+        });
+
+        return updateResponse.data;
+    } catch (err) {
+        console.error('Error publishing comment:', err);
+        throw err;
+    }
+}
 
 
 
 
-export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard, deleteCard, createCard };
+
+
+
+export { fetchAllBoards, createBoard, deleteBoard, fetchCards, upvoteCard, deleteCard, createCard , addComment };

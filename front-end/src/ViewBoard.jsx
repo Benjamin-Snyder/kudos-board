@@ -9,6 +9,7 @@ import CardList from "./CardList.jsx";
 import { upvoteCard, deleteCard } from "./utils.js";
 import CreateCardModal from "./CreateCardModal.jsx";
 import {DarkModeContext} from './DarkModeContext';
+import CardCommentModal from "./CardCommentModal.jsx";
 
 const ViewBoard = () => {
     const { id } = useParams();
@@ -134,6 +135,8 @@ const ViewBoard = () => {
                 onClose={handleCloseModal}
                 onCreateCard={loadCards}
             />
+
+            <CardCommentModal/>
 
 
             <CardList
