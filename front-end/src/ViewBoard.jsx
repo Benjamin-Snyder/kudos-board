@@ -1,13 +1,14 @@
 import "./ViewBoard.css";
 import { Link } from "react-router"; // Corrected import
 import { useParams } from "react-router"; // Corrected import
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Footer from "./Footer";
 import Header from "./Header";
 import CardList from "./CardList.jsx";
 import { upvoteCard, deleteCard } from "./utils.js";
 import CreateCardModal from "./CreateCardModal.jsx";
+import {DarkModeContext} from './DarkModeContext';
 
 const ViewBoard = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ const ViewBoard = () => {
     const [loading, setLoading] = useState(true); // Add loading state
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
-
+    const {darkMode} = useContext(DarkModeContext); // Add dark mode context
 
     const fetchBoard = async () => {
         try {
@@ -118,9 +119,9 @@ const ViewBoard = () => {
     }
 
     return (
-        <div className="view-board">
+        <div className={darkMode ? `dark-view-board` : `light-view-board`}>
             <Link to="/"><button id="home-button">Home</button></Link>
-            <div className="top-portion">
+            <div className={darkMode ? `dark-top-portion` : `light-top-portion`}>
                 <Header />
                 <h1>{board.title}</h1>
                 <button onClick={handleOpenModal}>Create a Card</button>

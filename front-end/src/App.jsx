@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, use, useContext } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import SearchBar from './SearchBar';
@@ -7,10 +7,13 @@ import BoardList from './BoardList.jsx';
 import './App.css';
 import CreateBoardButton from './CreateBoardButton.jsx';
 import CreateBoardModal from './CreateBoardModal.jsx';
+import {DarkModeContext} from './DarkModeContext';
 
 import {fetchAllBoards, deleteBoard} from './utils';
 
 function App() {
+
+  const{darkMode}= useContext(DarkModeContext);
 
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState(''); // Define searchQuery
@@ -61,8 +64,8 @@ function App() {
   }
 
   return (
-    <>
-      <header>
+    <div className={darkMode ? `Container Container-dark` : `Container Container-light`}>
+      <header className={darkMode ? `dark-header` : `light-header`}>
         <Header />
       </header>
       <div className="top-ui">
@@ -90,10 +93,10 @@ function App() {
         onDeleteClick={handleDeleteClick}
       />
 
-      <footer>
+      <footer className={darkMode ? `dark-footer` : `light-footer`}>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 }
 

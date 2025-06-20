@@ -11,6 +11,14 @@ body, html, #root {
 
 }
 
+.Container-dark{
+    background-color: rgb(44, 44, 44);
+}
+
+.Container-light{
+    background-color: rgb(255, 255, 255);
+}
+
 .top-ui{
     display: flex;
     flex-direction: column;
@@ -19,17 +27,32 @@ body, html, #root {
     align-items: center;
 }
 
-footer{
+.light-footer{
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
     background-color: bisque;
 }
 
-header{
+.dark-footer{
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(95, 95, 95);
+}
+
+.light-header{
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
     background-color: bisque;
+    margin-bottom: 5px;
+}
+
+.dark-header{
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(95, 95, 95);
     margin-bottom: 5px;
 }

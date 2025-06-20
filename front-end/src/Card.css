@@ -1,4 +1,4 @@
-.card {
+.light-card {
     position: relative; /* Ensure the card is a positioned element */
     display: flex;
     flex-direction: column;
@@ -13,6 +13,21 @@
     margin: 10px;
 }
 
+.dark-card {
+    position: relative; /* Ensure the card is a positioned element */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 16px;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    margin: 10px;
+}
+
 .card-buttons{
     display: flex;
     flex-direction: row;
@@ -20,13 +35,34 @@
 
 }
 
-.pin-button {
+.light-pin-button {
     position: absolute;
     top: 10px; /* Adjust as needed */
     left: 10px; /* Adjust as needed */
     width: 30px; /* Ensure the size is consistent */
     cursor: pointer; /* Optional: change cursor to pointer */
     margin-bottom: 0px;
+}
+
+.dark-pin-button {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    width: 30px; /* Ensure the size is consistent */
+    cursor: pointer; /* Optional: change cursor to pointer */
+    margin-bottom: 0px;
+    filter: invert(1);
+}
+
+.dark-card h3{
+    color: white;
+}
+.dark-card p{
+    color: white;
+}
+
+.dark-card .card-gif{
+    border: white solid 1px;
 }
 
 .card-gif{

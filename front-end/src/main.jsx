@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import ViewBoard from './ViewBoard.jsx'
+import {DarkModeProvider} from './DarkModeContext.jsx'
 
 import {createBrowserRouter, RouterProvider} from 'react-router'
 
@@ -20,7 +21,8 @@ const routes = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={routes} />
-  </StrictMode>,
+    <DarkModeProvider>
+      <RouterProvider router={routes} />
+    </DarkModeProvider>
+
 )
