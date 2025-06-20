@@ -135,9 +135,7 @@ Deployed Application (*required*): [https://kudos-board-1-zmwy.onrender.com/]
 
 ### Walkthrough Video
 
-TODO:// Add the embedded URL code to your animated app walkthrough below, ADD_EMBEDDED_CODE_HERE. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any *VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS* checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
-
-ADD_EMBEDDED_CODE_HERE
+https://www.loom.com/share/5bc0febd4e1841ceb6743d04290adb28?sid=3845cb99-4591-4c8f-b683-83ef41cf8f97
 
 ### Reflection
 
