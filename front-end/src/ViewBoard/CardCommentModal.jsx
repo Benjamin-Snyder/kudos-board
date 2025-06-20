@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./CardCommentModal.css";
-import { addComment } from "./utils";
+import { addComment } from "../utils";
 
 const CardCommentModal = ({ card = {}, isOpen, onClose }) => {
     const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState("");
+    const [author, setAuthor] = useState("");
 
-    console.log(`card comments: ${card.comments}`);
-
-    useEffect(() => {
+    useEffect(() => { // Update comments when card changes
         if (card.comments) {
             setComments(card.comments);
         }
     }, [card]);
 
-    const [comment, setComment] = useState("");
-    const [author, setAuthor] = useState("");
-
     const handlePost = async () => {
-        if (comment && author) {
+        if (comment && author) { // Check if comment and author are not empty
             const newComment = `${author}: ${comment}`;
-
             try {
-                const updatedCard = await addComment(card, newComment);
+                const updatedCard = await addComment(card, newComment); // Add comment to card in database
                 setComments(updatedCard.comments);
                 setComment("");
                 setAuthor("");
@@ -61,7 +57,6 @@ const CardCommentModal = ({ card = {}, isOpen, onClose }) => {
                     </div>
                     ))}
                 </div>
-
             </div>
         </div>
     );

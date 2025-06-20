@@ -1,4 +1,4 @@
-import "./CardList.css"
+import "./CardList.css";
 import Card from "./Card"
 
 const CardList = ({ cards, onUpvoteClick, onDeleteClick, onPinClick }) => {

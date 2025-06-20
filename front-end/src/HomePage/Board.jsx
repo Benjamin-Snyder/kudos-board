@@ -1,8 +1,7 @@
 import "./Board.css"
 import { Link } from "react-router"
-import { DarkModeContext } from "./DarkModeContext";
+import { DarkModeContext } from "../DarkModeContext";
 import { useContext } from "react";
-
 
 const Board = ({board, onDeleteClick}) => {
     const {darkMode} = useContext(DarkModeContext);
@@ -18,7 +17,5 @@ const Board = ({board, onDeleteClick}) => {
         </div>
     );
 }
-
-
 
 export default Board

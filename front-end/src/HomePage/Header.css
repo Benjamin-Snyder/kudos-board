@@ -13,7 +13,6 @@
     align-items: center;
 }
 
-
 .dark-header h1{
     font-size: 100%;
     color: white;
@@ -67,4 +66,3 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
-

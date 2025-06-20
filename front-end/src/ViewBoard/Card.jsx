@@ -1,14 +1,13 @@
 import "./Card.css";
-import filledPin from "./assets/filled-pin.png";
-import emptyPin from "./assets/empty-pin.png";
+import filledPin from "../assets/filled-pin.png";
+import emptyPin from "../assets/empty-pin.png";
 import { useState, useContext } from "react";
-import { DarkModeContext } from "./DarkModeContext";
+import { DarkModeContext } from "../DarkModeContext";
 import CardCommentModal from "./CardCommentModal";
 
 const Card = ({ card, onUpvoteClick, onDeleteClick, onPinClick }) => {
     const [pinSrc, setPinSrc] = useState(card.isPinned ? filledPin : emptyPin);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const {darkMode} = useContext(DarkModeContext);
 
     const handlePinClick = () => {
@@ -37,8 +36,6 @@ const Card = ({ card, onUpvoteClick, onDeleteClick, onPinClick }) => {
                 <button className="comment-button" onClick={handleOpenModal}>Comments</button>
             </div>
             <CardCommentModal card={card} isOpen={isModalOpen} onClose={handleCloseModal} />
-
-
         </div>
     );
 };

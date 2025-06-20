@@ -1,10 +1,8 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import ViewBoard from './ViewBoard.jsx'
+import App from './HomePage/App.jsx'
+import ViewBoard from './ViewBoard/ViewBoard.jsx'
 import {DarkModeProvider} from './DarkModeContext.jsx'
-
 import {createBrowserRouter, RouterProvider} from 'react-router'
 
 const routes = createBrowserRouter([
@@ -16,7 +14,6 @@ const routes = createBrowserRouter([
     path:"/boards/:id/cards",
     element: <ViewBoard />
   }
-
 ])
 
 
@@ -24,5 +21,4 @@ createRoot(document.getElementById('root')).render(
     <DarkModeProvider>
       <RouterProvider router={routes} />
     </DarkModeProvider>
-
 )

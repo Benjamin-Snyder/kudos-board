@@ -1,14 +1,14 @@
 import "./ViewBoard.css";
-import { Link } from "react-router"; // Corrected import
-import { useParams } from "react-router"; // Corrected import
+import { Link } from "react-router";
+import { useParams } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "../HomePage/Footer.jsx";
+import Header from "../HomePage/Header.jsx";
 import CardList from "./CardList.jsx";
-import { upvoteCard, deleteCard } from "./utils.js";
+import { upvoteCard, deleteCard } from "../utils.js";
 import CreateCardModal from "./CreateCardModal.jsx";
-import {DarkModeContext} from './DarkModeContext';
+import {DarkModeContext} from '../DarkModeContext.jsx';
 import CardCommentModal from "./CardCommentModal.jsx";
 
 const ViewBoard = () => {
@@ -20,7 +20,7 @@ const ViewBoard = () => {
     const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
     const {darkMode} = useContext(DarkModeContext); // Add dark mode context
 
-    const fetchBoard = async () => {
+    const fetchBoard = async () => { // Fetch board from database api
         try {
             const response = await axios.get(`${BASE_URL}/${id}`);
             setBoard(response.data);
@@ -29,8 +29,7 @@ const ViewBoard = () => {
         }
     };
 
-
-    const loadCards = async () => {
+    const loadCards = async () => { // Fetch cards from database api
         try {
             const cardsData = await axios.get(`${BASE_URL}/${id}/cards`);
             setCards(cardsData.data);
@@ -41,21 +40,21 @@ const ViewBoard = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect(() => { // Fetch board and cards on component mount
         fetchBoard();
         loadCards();
     }, [id]);
 
     const handlePinClick = async (card, isPinned) => {
         try {
-            const updatedCard = {
+            const updatedCard = { // Create updated card object
                 ...card,
                 isPinned: isPinned,
                 pinnedAt: isPinned ? new Date().toISOString() : null // Set timestamp or null
             };
-            await axios.put(`${BASE_URL}/${id}/cards/${card.id}`, updatedCard);
+            await axios.put(`${BASE_URL}/${id}/cards/${card.id}`, updatedCard); // Update card in database
 
-            setCards((prevCards) =>
+            setCards((prevCards) => // Update cards in state
                 prevCards.map((c) => (c.id === card.id ? updatedCard : c))
             );
         } catch (error) {
@@ -100,9 +99,6 @@ const ViewBoard = () => {
         }
     };
 
-
-
-
     const handleCloseModal = () => {
         setIsModalVisible(false); // Set modal visibility to false
     };
@@ -137,7 +133,6 @@ const ViewBoard = () => {
             />
 
             <CardCommentModal/>
-
 
             <CardList
                 cards={sortedCards}

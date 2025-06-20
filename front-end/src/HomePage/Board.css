@@ -1,0 +1,59 @@
+.light-board-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 16px;
+    border: 1px solid #000000;
+    box-sizing: border-box; 
+    margin: 10px;
+}
+
+.dark-board-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 16px;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.dark-img{
+    border: 1px solid white;
+}
+
+.card-buttons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.card-buttons button:hover{
+    transform: scale(1.07);
+    transition: transform 0.3s;
+}
+
+.board-card h3{
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.dark-board-card h3{
+    color: white;
+}
+
+.dark-board-card p{
+    color: white;
+}
+
+.delete-button{
+    margin-left: 60px;
+}

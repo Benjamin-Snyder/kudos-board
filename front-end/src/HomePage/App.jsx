@@ -1,38 +1,32 @@
-import { useState, useEffect, use, useContext } from 'react';
-import Footer from './Footer';
-import Header from './Header';
-import SearchBar from './SearchBar';
-import FilterButtons from './FilterButtons';
+import { useState, useEffect, useContext } from 'react';
+import Footer from './Footer.jsx';
+import Header from './Header.jsx';
+import SearchBar from './SearchBar.jsx';
+import FilterButtons from './FilterButtons.jsx';
 import BoardList from './BoardList.jsx';
 import './App.css';
 import CreateBoardButton from './CreateBoardButton.jsx';
 import CreateBoardModal from './CreateBoardModal.jsx';
-import {DarkModeContext} from './DarkModeContext';
-
-import {fetchAllBoards, deleteBoard} from './utils';
+import {DarkModeContext} from '../DarkModeContext.jsx';
+import {fetchAllBoards, deleteBoard} from '../utils.js';
 
 function App() {
-
   const{darkMode}= useContext(DarkModeContext);
-
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState(''); // Define searchQuery
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [boards, setBoards] = useState([]);
 
-
-  const loadBoards = async () => {
+  const loadBoards = async () => { // Load boards from API
     const data = await fetchAllBoards();
     setBoards(data);
   };
 
-  useEffect(() => {
+  useEffect(() => { // Load boards on initial render
     loadBoards();
   }, []);
 
   const apiBoards = fetchAllBoards();
-
-
 
   const handleCreateBoardClick = () => {
     setIsModalVisible(true); // Show modal
@@ -41,9 +35,6 @@ function App() {
   const handleCloseModal = () => {
     setIsModalVisible(false); // Hide modal
   };
-
-
-
 
   const handleDeleteClick = async (boardId) => {
     try {
@@ -54,7 +45,6 @@ function App() {
     }
   };
 
-
   const handleFilterChange = (newFilter) =>{
     setFilter(newFilter);
   }
@@ -64,7 +54,7 @@ function App() {
   }
 
   return (
-    <div className={darkMode ? `Container Container-dark` : `Container Container-light`}>
+    <div className={darkMode ? `Container container-dark` : `Container container-light`}>
       <header className={darkMode ? `dark-header` : `light-header`}>
         <Header />
       </header>

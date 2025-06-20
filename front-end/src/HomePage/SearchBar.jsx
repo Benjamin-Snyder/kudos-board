@@ -8,17 +8,17 @@ const SearchBar = ({onSearchChange}) => {
         setInputValue(event.target.value);
     }
 
-    const handleSearchClick = () => {
+    const handleSearchClick = () => { // Handle the search button click
         onSearchChange(inputValue);
     }
 
-    const handleEnterKey= (event) => {
+    const handleEnterKey= (event) => { // Handle the enter key
         if (event.key === 'Enter') {
             onSearchChange(inputValue);
         }
     }
 
-    const handleClearClick = () => {
+    const handleClearClick = () => { // Handle the clear button click
         setInputValue('');
         onSearchChange('');
     }

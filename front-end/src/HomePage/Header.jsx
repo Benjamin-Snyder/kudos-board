@@ -1,6 +1,6 @@
 import "./Header.css"
-import Medal from "./assets/medal.png"
-import { DarkModeContext } from "./DarkModeContext";
+import Medal from "../assets/medal.png"
+import { DarkModeContext } from "../DarkModeContext";
 import { useContext } from "react";
 
 const Header = () => {
@@ -19,10 +19,7 @@ const Header = () => {
             </label>
             <span className="mode-label">Toggle Dark Mode</span>
         </div>
-
     )
-
 }
-
 
 export default Header;

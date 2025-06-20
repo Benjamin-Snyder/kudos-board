@@ -1,6 +1,6 @@
 import {createContext, useState} from 'react';
 
-const DarkModeContext = createContext();
+const DarkModeContext = createContext(); // create a context
 
 function DarkModeProvider(props){
     const [darkMode, setDarkMode] = useState(false);

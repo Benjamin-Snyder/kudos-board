@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-
 }
 
 .dark-top-portion{
@@ -11,18 +10,15 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-
 }
 
 .dark-top-portion h1{
     color: white;
 }
 
-
 .dark-top-portion img{
     filter: invert(1);
 }
-
 
 .light-view-board{
     background-color: white;

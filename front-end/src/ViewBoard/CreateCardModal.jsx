@@ -1,22 +1,19 @@
 import "./CreateCardModal.css"
-import { useEffect, useState } from "react"
-import { createCard } from "./utils.js"
+import { useState } from "react"
+import { createCard } from "../utils.js"
 import axios from "axios";
 const GIPHY_API_KEY = import.meta.env.VITE_API_KEY;
 
 const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => {
-
     const [searchQuery, setSearchQuery] = useState("");
     const [gifs, setGifs] = useState([]); // Array of gif objects
     const [titleError, setTitleError] = useState(false);
     const [descriptionError, setDescriptionError] = useState(false);
     const [gifUrlError, setGifUrlError] = useState(false);
 
-
     if (!isModalVisible) return null;
 
-    const handleCreateCard = async () => {
-
+    const handleCreateCard = async () => { // Create card function
         const title = document.getElementById('card-title').value;
         const description = document.getElementById('card-description').value;
         const gifUrl = document.getElementById('gif-url').value;
@@ -50,7 +47,7 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
         }
 
         try {
-            await createCard(boardId, title, description, gifUrl, owner);
+            await createCard(boardId, title, description, gifUrl, owner); // Create card in database
             onCreateCard();
             onClose();
         } catch (error) {
@@ -60,7 +57,7 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
 
     const handleSearchGifs = async () => {
         try{
-            const response = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
+            const response = await axios.get(`https://api.giphy.com/v1/gifs/search`, { // Search gifs from api
                 params: {
                     api_key: GIPHY_API_KEY,
                     q: searchQuery,
@@ -123,7 +120,6 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
                                         style={{ cursor: 'pointer', margin: '5px' }}
                                     />
                                 </div>
-
                             ))}
                     </div>
 
@@ -135,12 +131,10 @@ const CreateCardModal = ({ boardId, isModalVisible, onClose, onCreateCard }) => 
                         style={{ borderColor: gifUrlError ? 'red' : 'initial' }}
                     />
 
-
                     <button className="copy-button">Copy GIF URL</button>
                     <input type="text" id="owner" placeholder="Enter owner (optional)" />
                     <button className="submit" onClick={ () => {handleCreateCard(), setSearchQuery("")}} >Create Card</button>
                 </div>
-
             </div>
         </div>
     );

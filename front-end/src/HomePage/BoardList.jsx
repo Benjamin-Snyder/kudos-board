@@ -6,9 +6,8 @@ const BoardList = ({filter, searchQuery, cards, onDeleteClick}) => {
         card.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-
     const filteredCards = (cards) => {
-        if (filter === 'all') {
+        if (filter === 'all') { // Show all boards
             return cards;
         } else if (filter === 'recent') {
             const sorted = cards.sort((a, b) => {
@@ -18,16 +17,16 @@ const BoardList = ({filter, searchQuery, cards, onDeleteClick}) => {
             })
             return sorted.splice(0,6);
         } else if (filter === 'celebration') {
-            return cards.filter(card => card.type === 'celebration');
+            return cards.filter(card => card.type === 'celebration'); // Only show celebration boards
         } else if (filter === 'thank You') {
-            return cards.filter(card => card.type === 'thank you');
+            return cards.filter(card => card.type === 'thank you'); // Only show thank you boards
         } else if (filter === 'inspiration') {
-            return cards.filter(card => card.type === 'inspiration');
+            return cards.filter(card => card.type === 'inspiration'); // Only show inspiration boards
         }
         return [];
     };
 
-    const cardsToDisplay = filteredCards(searchedCards);
+    const cardsToDisplay = filteredCards(searchedCards); // Apply the filter to the searched cards
 
     return (
         <div className="list-of-boards">

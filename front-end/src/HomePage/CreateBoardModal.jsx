@@ -1,13 +1,13 @@
 
 import "./CreateBoardModal.css";
-import { createBoard } from './utils.js';
+import { createBoard } from '../utils.js';
 import { useState } from 'react';
 
 const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
     const [titleError, setTitleError] = useState(false);
     const [categoryError, setCategoryError] = useState(false);
 
-    if (!isModalVisible) {
+    if (!isModalVisible) { // If the modal is not visible, return null to hide it
         return null;
     }
 
@@ -16,6 +16,7 @@ const CreateBoardModal = ({ isModalVisible, onClose, onBoardCreated }) => {
         const type = document.getElementById('types').value;
         const author = document.getElementById('board-author').value;
 
+        // Validate form inputs
         let hasError = false;
         if (!title) {
             setTitleError(true);
