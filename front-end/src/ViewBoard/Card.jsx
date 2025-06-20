@@ -32,7 +32,7 @@ const Card = ({ card, onUpvoteClick, onDeleteClick, onPinClick }) => {
             <p>{card.description}</p>
             <div className="card-buttons">
                 <button className="upvote-button" onClick={() => onUpvoteClick(card)}>{`Upvote: ${card.upvotes}`}</button>
-                <button className="delete-button" onClick={() => onDeleteClick(card)}>Delete Board</button>
+                <button className="delete-button" onClick={() => onDeleteClick(card)}>Delete Card</button>
                 <button className="comment-button" onClick={handleOpenModal}>Comments</button>
             </div>
             <CardCommentModal card={card} isOpen={isModalOpen} onClose={handleCloseModal} />

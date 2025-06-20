@@ -11,6 +11,7 @@ import CreateCardModal from "./CreateCardModal.jsx";
 import {DarkModeContext} from '../DarkModeContext.jsx';
 import CardCommentModal from "./CardCommentModal.jsx";
 
+
 const ViewBoard = () => {
     const { id } = useParams();
     const [board, setBoard] = useState(null);
